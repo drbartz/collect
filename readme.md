@@ -17,15 +17,14 @@ not in scope.
 # Install PreReqs
     pip install -r deps.lst
 
-## Windows Caveats
-Statser currently only depends on `psutil`, if pip fails for you for one reason or another (e.g. requiring vc compiler),
-consider installing `psutil` by hand from [http://code.google.com/p/psutil/] and set your PATH to c:\\PythonXX\;
-
 # Create log file
 	sudo useradd collect -s /sbin/nologin
 	sudo touch /var/log/collect.log
 	sudo chmod 664 /var/log/collect.log
 	sudo chown collect:collect /var/log/collect.log
 
+# initial settins
+	cp -a src/settins.py_example src/settins.py
+
 # Running
-	./collect.py
+	src/collect.py
