@@ -9,7 +9,7 @@ LOG_LEVEL="DEBUG"
 CLIENT_PREFIX = "srv.skyline"
 
 # time to wait for the next pooling, in secons
-CLIENT_POOLING = 10
+CLIENT_POOLING = 60
 
 """
 Graphite Server, where your carbon is running
