@@ -59,8 +59,8 @@ class Collect:
 				if ( nowtime - self.last[name]["time"]) < ( 2 * self.conf["CLIENT_POOLING"]):
 					delta_data = data - self.last[name]["data"]
 					delta_time = nowtime - self.last[name]["time"]
-					data = delta_data/delta_time
-					self.final.append({"name":name,"data":data,"time":nowtime,"type":type})
+					final_data = delta_data/delta_time
+					self.final.append({"name":name,"data":final_data,"time":nowtime,"type":type})
 				else: log.debug("no valid last data for: "+ name+" on time"+str( 2 * self.conf["CLIENT_POOLING"]))
 			else: log.debug("no last data for: "+ name)
 			# Add to last db the last value
