@@ -24,7 +24,8 @@ not in scope.
 	sudo chown collect:collect /var/log/collect.log
 
 # initial settins
-	cp -a src/settins.py_example src/settins.py
+	cp -a src/settings.py_example src/settings.py
 
 # Running
 	src/collect.py
+

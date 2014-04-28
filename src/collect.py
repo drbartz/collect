@@ -3,7 +3,7 @@ import platform
 import socket
 import psutil
 import sys
-from settins import *
+from settings import *
 from time import time, sleep
 import logging as log
 
@@ -70,10 +70,8 @@ class Collect:
 
 	def collect_disk_io(self,whitelist=[]):
 		"""
-        disks is a list of disk to be collected
-        if disks is empty, collect all disk io stats
-
-        TODO rewrite to avoid using private functions from psutil
+		disks is a list of disk to be collected
+		if disks is empty, collect all disk io stats
 		"""
 		stats=psutil.disk_io_counters(perdisk=True)
 		for entry,stat in stats.iteritems():
@@ -83,7 +81,7 @@ class Collect:
 
 	def collect_network_io(self,whitelist=[]):
 		"""
-		TODO refactor, as it is essentially copy-paste of disk_io
+		collect_network_io is a list of disk to be collected
 		"""
 		stats=psutil.net_io_counters(pernic=True)
 		for entry,stat in stats.iteritems():
@@ -92,7 +90,7 @@ class Collect:
 					self.add_data("so.nic.%s.%s"%(entry.replace(" ","_"),k),v,type='COUNTER')
 	def collect_cpu_times(self,whitelist=[]):
 		"""
-        whitelist is a list of cpus to be used, must be integer
+		whitelist is a list of cpus to be used, must be integer
 		"""
 		stats=psutil.cpu_times(percpu=True)
 		for entry,stat in enumerate(stats):
@@ -101,7 +99,7 @@ class Collect:
 					self.add_data("so.cpu.%d.%s"%(entry,k),v,type='COUNTER')
 	def collect_phymem_usage(self):
 		"""
-		TODO skip the percentage? it can be calculated by graphite, so...
+		collect_phymem_usage is a list of pysical memory to be collected
 		"""
 		#stats = psutil.phymem_usage()
 		stats = psutil.virtual_memory()
@@ -109,12 +107,15 @@ class Collect:
 			self.add_data("so.phymem.%s"%k,v)
 
 	def collect_uptime(self):
+		"""
+		collect_uptime is a the machine uptime
+		"""
 		uptime = int(time()) - int(psutil.boot_time())
 		self.add_data("so.uptime",uptime)
 
 	def collect_virtmem_usage(self):
 		"""
-		TODO skip the percentage? it can be calculated by graphite, so...
+		collect_virtmem_usage is a list of virtual memory to be collected
 		"""
 		stats = psutil.swap_memory()
 		for k,v in stats._asdict().iteritems():
