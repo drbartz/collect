@@ -1,0 +1,13 @@
+# collect - A system statistics collector for graphite
+#
+# collect is a python scritp for gather system statistics 
+# and publishing them to graphite.
+
+start on stopped rc RUNLEVEL=[2345]
+stop on runlevel [!2345]
+
+respawn
+
+script
+    /usr/bin/python /root/collect/src/collect.py
+end script
