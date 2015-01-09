@@ -26,9 +26,10 @@ class Collect:
 # calculate value to send to graphite
 		self.final = []
 		self.retrycount=0
-	
+		hostname = socket.gethostname()
 		try: self.conf["CLIENT_PREFIX"]=CLIENT_PREFIX
 		except: self.conf["CLIENT_PREFIX"]="srv.client"
+		self.conf["CLIENT_PREFIX"]=self.conf["CLIENT_PREFIX"]+"."+str(hostname)
 	
 		try: self.conf["GRAPHITE_SERVER_IP"]=GRAPHITE_SERVER_IP
 		except: self.conf["GRAPHITE_SERVER_IP"]="127.0.0.1"
